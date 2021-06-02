@@ -70,3 +70,7 @@ print("Improved", sol.solution(nums, k))
 # 29 min for both
 # Was the solution optimal
 # Were there any bugs
+# 5 3 2 5 = 3.75
+
+# There is an even better solution to this problem than what I have done. That is using the quick sort method
+#  recursively call down using quick sort until the pivot is located at the n - k position

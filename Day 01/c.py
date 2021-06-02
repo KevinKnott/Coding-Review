@@ -32,3 +32,7 @@ nums = [1, 2, 3, 4]
 
 sol = initial()
 print(sol.solution(nums))
+
+
+# This could be improved to o(1) space if we convert either suffix or prefix to be the nums array and then dynamically solving the other on the fly
+# 4 5 3 3 = 3.75
