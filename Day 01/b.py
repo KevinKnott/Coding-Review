@@ -75,64 +75,13 @@ class MyQueue1:
 
 # I solved initially but I forgot about poping from an empty array
 
-#  This second solution needs to change to
-class MyQueue2:
-
-    def __init__(self):
-        """
-        Initialize your data structure here.
-        """
-        self.stack_a = []
-        self.stack_b = []
-        self.items = 0
-
-    def push(self, x: int) -> None:
-        """
-        Push element x to the back of queue.
-        """
-        self.items += 1
-        if len(self.stack_a) > 0:
-            self.stack_b.append(self.stack_a.pop())
-
-        self.stack_a.append(x)
-
-    def pop(self) -> int:
-        """
-        Removes the element from in front of queue and returns that element.
-        """
-        if self.empty():
-            return
-
-        self.items -= 1
-
-        result = self.stack_a.pop()
-
-        if self.items > 0:
-            self.stack_a.append(self.stack_b.pop())
-
-        return result
-
-    def peek(self) -> int:
-        """
-        Get the front element.
-        """
-        if self.empty():
-            return
-
-        return self.stack_a[0]
-
-    def empty(self) -> bool:
-        """
-        Returns whether the queue is empty.
-        """
-        return self.items == 0
-
 
 # Score Card
 # Did I need hints
 # Did you finish within 30 min
 # 19 minI spent rest of time trying to figure out amortization but didn't figure it out
 # Was the solution optimal
-# No I couldnt figure out how to amortize this to run in o(1)
+# No I couldnt figure out how to amortize this to run in o(1) it turns out that my solution is consider an amortized o(1) however I need to update peek in order to always have the reference (can change later)
 # Were there any bugs
 # Forgot to check if people will pop an empty stack
+# 5 5 4 5 = 4.75
