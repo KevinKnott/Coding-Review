@@ -12,6 +12,17 @@ My goal is to go through the following list that I have pulled from leetcode and
 
 You can view this list [here](https://www.notion.so/a41b4ff9be814387b5ab56a31275772d?v=e823a3de036d4ea48b392eccc25803d5)
 
+# Score Card
+
+My scores will be based on an average of score from 1-5 on the following
+
+<ol>
+<li>Did I need hints</li>
+<li>Did you finish within 30 min</li>
+<li>Was the solution optimal</li>
+<li>Were there any bugs</li>
+</ol>
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
