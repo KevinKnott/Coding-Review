@@ -7,7 +7,7 @@ class initial():
 
         return nums[len(nums) - k] if len(nums) - k > 0 else -1
 
-
+# https://leetcode.com/problems/kth-largest-element-in-an-array/solution/
 # Given an integer array nums and an integer k, return the kth largest element in the array.
 # Note that it is the kth largest element in the sorted order, not the kth distinct element.
 
@@ -19,6 +19,7 @@ class initial():
 # nums = [3, 2, 1, 5, 6, 4]
 # k = 2
 # Output should be 5
+
 
 # Test Case 2
 nums = [3, 2, 3, 1, 2, 4, 5, 5, 6]
@@ -65,6 +66,7 @@ print("Improved", sol.solution(nums, k))
 
 # Score Card
 # Did I need hints
-# Did you finish within 30 min
+# Did you finish within 30 min?
+# 29 min for both
 # Was the solution optimal
 # Were there any bugs
