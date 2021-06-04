@@ -15,6 +15,7 @@ class initial():
 
         for i in reversed(range(len(s))):
             cur = s[i]
+
             # print(cur, cur.isdigit())
             if cur.isdigit():
                 # add digit to the write place
@@ -39,11 +40,23 @@ class initial():
             # Push whatever is currently half read onto stack
             stack.append(operand)
 
-        return stack, self.eval(stack)
+        return self.eval(stack)
 
     def eval(self, stack):
+        # Since the eval has to be valid by rules we pop the first digit to get to the operation
+
+        res = stack.pop() if stack else 0
         print(stack)
-        return
+        while stack and stack[-1] != ')':
+            # find the operation
+            sign = stack.pop()
+            # get next digit
+            if sign == '+':
+                res += stack.pop()
+            else:
+                res -= stack.pop()
+
+        return res
 
 # Score Card
 # Did I need hints? yes
@@ -54,7 +67,7 @@ class initial():
 
 
 a = '1+2'
-b = '-1+2'
+b = '1 + -2'  # '-1+2'
 c = '(1+(4+5+2)-3)+(6+8)'
 sol = initial()
 print(sol.calculate(a))
