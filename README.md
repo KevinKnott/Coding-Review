@@ -4,7 +4,7 @@ This repo will be for tracking of my progress at improving my basic coding skill
 My goal is to go through the following list that I have pulled from leetcode and practice my problem solving skills in the following manner.
 
 <ol>
-<li>Review 5 problems</li>
+<li>Review 3 problems</li>
 <li>Spend 30 minutes trying to solve</li>
 <li>Rate performance and place problems back into list in difficulty based of rating</li>
 <li>Repeat until comfortable</li>
