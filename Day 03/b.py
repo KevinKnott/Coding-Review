@@ -58,11 +58,11 @@ class initial():
         return selection(len(nums) - k)
 
 # Score Card
-# Did I need hints?
-# Did you finish within 30 min?
-# Was the solution optimal?
-# Were there any bugs?
-#  3 3 4 3 = 3.25
+# Did I need hints? N
+# Did you finish within 30 min? N
+# Was the solution optimal? Y
+# Were there any bugs? N
+#  4 4 5 3 = 4
 
 
 a = [3, 2, 1, 5, 6, 4]

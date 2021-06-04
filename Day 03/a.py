@@ -63,7 +63,7 @@ class initial():
 # Did you finish within 30 min? No
 # Was the solution optimal? I am unsure
 # Were there any bugs? Yeah i took too long to figure out how to parse a number given a string and it took me a while to figure out
-#  3 3 4 3 = 3.25
+#  1 1 2 2 = 1.5
 
 
 a = '1+2'
