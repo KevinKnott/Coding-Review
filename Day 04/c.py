@@ -84,8 +84,8 @@ class MedianFinder2():
         return -1 * self.low[0] if len(self.low) != len(self.high) else ((-1 * self.low[0] + self.high[0]) / 2)
 
 # Score Card
-# Did I need hints?
-# Did you finish within 30 min?
-# Was the solution optimal?
-# Were there any bugs?
-#  1 1 2 2 = 1.5
+# Did I need hints? Y for the optimal solution my original wasn't really bad
+# Did you finish within 30 min? N
+# Was the solution optimal? Yes
+# Were there any bugs? See note above the method with heaps
+#  3 3 5 4 = 3.75
