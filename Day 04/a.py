@@ -3,9 +3,20 @@
 # You may assume that each input would have exactly one solution, and you may not use the same element twice.
 # You can return the answer in any order.
 
+
+#  Initial thought was to use a set but that will only work if I return the numbers not the index
 class init():
-    def twoSum(nums, k):
-        return
+    def twoSum(self, nums, k):
+        seen = {}
+
+        for i, num in enumerate(nums):
+            target = k - num
+
+            if target in seen:
+                return [i, seen[target]] if i < seen[target] else [seen[target], i]
+
+            seen[num] = i
+
 
 # Score Card
 # Did I need hints?
@@ -13,3 +24,8 @@ class init():
 # Was the solution optimal?
 # Were there any bugs?
 #  1 1 2 2 = 1.5
+
+A = [2, 7, 11, 15]
+k = 9
+sol = init()
+print(sol.twoSum(A, k))
