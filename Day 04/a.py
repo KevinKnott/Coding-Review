@@ -19,11 +19,11 @@ class init():
 
 
 # Score Card
-# Did I need hints?
-# Did you finish within 30 min?
-# Was the solution optimal?
-# Were there any bugs?
-#  1 1 2 2 = 1.5
+# Did I need hints? N
+# Did you finish within 30 min? Y
+# Was the solution optimal? Y O(N) Time and Space
+# Were there any bugs? N
+#  5 5 5 5 = 5
 
 A = [2, 7, 11, 15]
 k = 9
