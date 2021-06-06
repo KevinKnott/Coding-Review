@@ -22,7 +22,7 @@ class MedianFinder:
         return
 
     def addNum(self, num):
-        Initital insertion O(N) not quite fast enough could improve through binary search and then insert which would be o(log(n)) or o(nlogn)
+        # Initital insertion O(N) not quite fast enough could improve through binary search and then insert which would be o(log(n)) or o(nlogn)
         index = 0
         while len(self.nums) > 0 and index < len(self.nums) and self.nums[index] < num:
             index += 1
