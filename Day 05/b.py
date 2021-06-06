@@ -1,3 +1,7 @@
+# https://leetcode.com/contest/weekly-contest-244/problems/reduction-operations-to-make-the-array-elements-equal/
+# First solution physically transforms the array one at a time n^2 the second solutions sorts and then creates a hash
+# and removes elements down one at a time to incrase performance
+
 from collections import defaultdict
 
 
