@@ -1,3 +1,6 @@
+# https://leetcode.com/contest/weekly-contest-244/problems/determine-whether-matrix-can-be-obtained-by-rotation/
+# Simply rotate the matrix and check if they equal
+
 class Solution:
     def findRotation(self, mat, target) -> bool:
         if mat == target:
