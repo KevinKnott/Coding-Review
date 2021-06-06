@@ -60,3 +60,27 @@ class Solution:
 
         print(values)
         return count
+
+
+class OptimalSolution:
+    def reductionOperations(self, nums: List[int]) -> int:
+        # In order to do this we will do what I did in the above but in reverse
+        nums.sort()
+
+        # Basically this is a dp problem so i set my dp array
+        count = [0] * len(nums)
+
+        # Go through the array and either if values are the same keep count the same
+        # otherwise increase the count by 1 for all values to the right (you have to swap all values one more time)
+        for i in range(1, len(nums)):
+            if nums[i] == nums[i-1]:
+                count[i] = count[i-1]
+            else:
+                count[i] = count[i-1] + 1
+
+        # Once you are done you sum all of these changes
+        result = 0
+        for num in count:
+            result += num
+
+        return result
