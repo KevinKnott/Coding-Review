@@ -4,17 +4,60 @@
 # You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
 # Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
 
+# Simply loop through numbers and check all numbers after for greatest difference
+
 
 class init():
-    def maxProfit(self, prices):
-        return
+    # This is not optimal as it is an O(n^2) solution
+    def maxProfit1(self, prices):
+        profit = 0
+        for i in range(len(prices)):
+            for j in range(i+1, len(prices)):
+                profit = max(profit, prices[j] - prices[i])
+
+        return profit
+
+    # Can we do this in one pass?
+    # This works as I expected and is in o(n) time and o(1) space
+    def maxProfit2(self, prices):
+        # keep lowest we have seen so far
+        # Check to see if your low is a new low
+        # if it is reset max
+        # return highest profit?
+
+        maxProfit = 0
+        low, high = 0, 0
+
+        for i in range(len(prices)):
+            if prices[i] < prices[low]:
+                maxProfit = max(maxProfit, prices[high] - prices[low])
+                low = i
+                high = i
+            else:
+                if prices[high] < prices[i]:
+                    high = i
+                    maxProfit = max(maxProfit, prices[high] - prices[low])
+
+        return maxProfit
+
+    def maxProfitOptimal(self, prices):
+        # This could be improved by taking the peaks only so if we have a new low do something
+        # and if we have a new high we need to do something
+        maxProfit = 0
+        low = float('inf')
+
+        for i in range(len(prices)):
+            if prices[i] < low:
+                low = prices[i]
+            elif (prices[i] - low > maxProfit):
+                maxProfit = prices[i] - low
+
+        return maxProfit
+
 
 # Score Card
-# Did I need hints? Y
-# I went to a very similar solution first however I tried using a list as an inbetween
+# Did I need hints? For a slighlty more optimal also O(n) time yes but not really
 # Did you finish within 30 min? Y
-# Was the solution optimal? Y although my first solution had added complexity since My thought process wasn't quite completed
+# Was the solution optimal? Y
 # Were there any bugs? N
-# I didn't have any big bugs but using non local within nested functions tripped me up because I didn't remember that it was needed
-# Also nested functions get a bit tricky
-#  3 4 4 2 = 3.25
+#  4 5 5 5 = 4.75
