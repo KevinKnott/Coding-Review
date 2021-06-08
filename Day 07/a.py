@@ -17,12 +17,26 @@ class MedianFinder:
         """
         initialize your data structure here.
         """
+        self.values = []
 
     def addNum(self, num: int) -> None:
+        if len(self.values) == 0:
+            self.values.append(num)
+
+        index = 0
+        while index < len(self.values) and num > self.values[index]:
+            index += 1
+
+        self.values.insert(index, num)
         return
 
     def findMedian(self) -> float:
-        return
+        midPoint = len(self.values) / 2
+
+        if len(self.values) % 2 == 0:
+            return (self.values[midPoint - 1] + self.values[midPoint]) / 2
+
+        return self.values[midPoint]
 
 # Score Card
 # Did I need hints?
