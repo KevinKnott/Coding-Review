@@ -10,6 +10,9 @@
 # My initial thought is that this is actually a stack problem because it is like a calculator problem (basic calc) you have Elements and how many there are then you have multiplication based off the level
 
 
+from collections import Counter
+
+
 class Solution:
     def countOfAtoms(self, formula: str) -> str:
         # Call dfs for our formula
@@ -61,6 +64,65 @@ class Solution:
                 result[element] = 1
         return result
 
+
+# I realize that instead of using a straight dictionary we can use a counter (a subclass of dict) that allows us to just add values and ret 0 if they aren't there
+# Next Day upsolving (since I was so close)
+class Solution:
+    def countOfAtoms(self, formula: str) -> str:
+        # Call dfs for our formula
+        def dfsParse():
+            # Previously I had used an if statment to find the parens and pass it down which works minus the fact that we don't move
+            # our index to the very end and that makes it a bit complicated. to combat this I am using the self.index to move my pointer
+
+            count = Counter()
+            # We need to loop over variables from 0 -> len(formula) or until we hit  a parne H2(OMg2)4  this will let us dive into parens
+            # and multiply when we pass the end of them
+            while self.index < len(formula) and formula[self.index] != ')':
+                # If there is an open parenthesis increase our index and recurse
+                if formula[self.index] == '(':
+                    self.index += 1
+                    # Recurse
+                    for element, value in dfsParse().items():
+                        count[element] += value
+                else:
+                    start = self.index
+                    self.index += 1
+                    # Get the Element
+                    while self.index < len(formula) and formula[self.index].islower():
+                        self.index += 1
+                    element = formula[start:self.index]
+
+                    # Get the count
+                    start = self.index
+                    while self.index < len(formula) and formula[self.index].isdigit():
+                        self.index += 1
+                    count[element] += int(formula[start:self.index] or 1)
+
+            # Because we could end on a  ')' we need to increase the index
+            self.index += 1
+
+            # Handle possible multiplication
+            start = self.index
+            while self.index < len(formula) and formula[self.index].isdigit():
+                self.index += 1
+
+            if start < self.index:
+                multiplicationFactor = int(formula[start:self.index] or 1)
+
+                for element in count.keys():
+                    count[element] *= multiplicationFactor
+            return count
+
+        self.index = 0
+        result = []
+        count = dfsParse()
+        for element in sorted(count):
+            result.append(element)
+            elementCount = count[element]
+            if elementCount > 1:
+                result.append(str(elementCount))
+
+        return ''.join(result)
 
 # Unfortunately I wasn't able to finish this one. I was able to get it to parse with no parens and was working on expanding this
 
