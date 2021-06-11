@@ -4,13 +4,26 @@
 # You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
 # Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
 
+# Initial thought here is to take the lowest price if you  see a lower one else check if the dif between lowest and cur is greater than max
+#  This was correct however I didn't write the brute force which is that You can do a double for loop checking each combo
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        return
+        if len(prices) <= 1:
+            return 0
+
+        profit, lowest = 0, prices[0]
+
+        for i in range(len(prices)):
+            if prices[i] <= lowest:
+                lowest = prices[i]
+            else:
+                profit = max(profit, prices[i] - lowest)
+
+        return profit
 
 # Score Card
-# Did I need hints? Ish
-# Did you finish within 30 min? N
-# Was the solution optimal? The result ends up parsing in O(N) but it is divide and conquer
-# Were there any bugs? So many edge cases for english
-#  2 1 4 2 = 2.25
+# Did I need hints? N
+# Did you finish within 30 min? Y
+# Was the solution optimal? Yes this is an o(n) time and o(1) space which is optimal over brute force o(n^2)
+# Were there any bugs? None :D
+#  5 5 5 5 = 5
