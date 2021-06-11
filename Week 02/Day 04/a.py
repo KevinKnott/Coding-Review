@@ -1,80 +1,42 @@
-# Decode String: https://leetcode.com/problems/decode-string/
-# Given an encoded string, return its decoded string.
-# The encoding rule is: k[encoded_string], where the encoded_string inside the square brackets is being repeated exactly k times. Note that k is guaranteed to be a positive integer.
-# You may assume that the input string is always valid; No extra white spaces, square brackets are well-formed, etc.
-# Furthermore, you may assume that the original data does not contain any digits and that digits are only for those repeat numbers, k. For example, there won't be input like 3a or 2[4].
+# Next Greater Element I:
 
-#  this problem reminds me of the Element problem from the other day
-#  Loop through the array if there is a digit we know that we need to add a string repetitievly
+# You are given two integer arrays nums1 and nums2 both of unique elements, where nums1 is a subset of nums2.
+# Find all the next greater numbers for nums1's elements in the corresponding places of nums2.
+# The Next Greater Number of a number x in nums1 is the first greater number to its right in nums2. If it does not exist, return -1 for this number.
 
-# Ran out of time I just need to implement the recursive piece to work for this 1[ab2[c]]e
-# As my code initially woulld break because I wasn't initially recursion on []
+
 class Solution:
-    def decodeString(self, s: str) -> str:
-        self.index = 0
-        result = ''
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        nextHighest = {}
+        currentVals = []
 
-        def parse():
-            result = ''
-            while self.index < len(s) and s[self.index] != ']':
-                if s[self.index].isdigit():
+        for num in nums2:
 
-                    start = self.index
-                    # Step over current number
-                    self.index += 1
-                    while self.index < len(s) and s[self.index] != '[':
-                        self.index += 1
-                    repeat = int(s[start: self.index])
-                    # Step over '['
-                    self.index += 1
+            while len(currentVals) != 0 and num > currentVals[-1]:
+                nextHighest[currentVals.pop()] = num
 
-                    temp = parse()
-                    # start = self.index
-                    # while self.index < len(s) and s[self.index] != ']':
-                    #     self.index += 1
-                    result += repeat * temp
+            currentVals.append(num)
 
-                else:
-                    result += s[self.index]
-                    self.index += 1
+        while len(currentVals) != 0:
+            nextHighest[currentVals.pop()] = -1
 
-            self.index += 1
-            return result
+        result = []
 
-        result = parse()
+        for num in nums1:
+            if num in nextHighest:
+                result.append(nextHighest[num])
+            else:
+                result.append(-1)
         return result
 
-# It took me about an hour and 10 to do this but I figured it out
-#  this solution is a o(N)  time and o(k) space where k is the number of [] (we recurse each time we see one)
-
-# There is a slightly easier solution that I didn't see though
-    def decodeStringStacks(self, s: str) -> str:
-        curString = ''
-        count = []
-        strings = []
-        i = 0
-        while i < len(s):
-            if s[i].isdigit():
-                start = i
-                while i < len(s) and s[i].isdigit():
-                    i += 1
-                count.append(int(s[start:i]))
-                strings.append(curString)
-                curString = ''
-
-            elif s[i] == ']':
-                curString = strings.pop() + count.pop() * curString
-
-            else:
-                curString += s[i]
-
-            i += 1
-        return curString
-
+# This is an o(n+m) time and o(n) space solution which is optimal for time
+# You could technically do a more space efficient solution that is o(mn) where for each num in num1 you search for it
+# in nums2 and then find the number that is after that is greater although I guess since we are creating the result list
+# it would technically still be o(n) space
 
 # Score Card
-# Did I need hints? N (But the second solution did)
-# Did you finish within 30 min? No 1:30
-# Was the solution optimal? My initial solution is optimal however I messed up the initial coding of it
-# Were there any bugs? I forgot that since it is possible to have [[[[]]]] I need to actually recurse
-#  4 1 2 1 = 2
+# Did I need hints? N
+# Did you finish within 30 min? Y
+# Was the solution optimal? Y
+# Were there any bugs? Forgot to return results
+#  5 5 5 4 = 4.75
