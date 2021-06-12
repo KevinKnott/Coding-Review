@@ -49,9 +49,10 @@ class Solution:
             fast = nums[fast]
 
         return slow
+
 # Score Card
-# Did I need hints? N
+# Did I need hints? Yes for the loop detection I didn't think about it
 # Did you finish within 30 min? Y
-# Was the solution optimal? Y
-# Were there any bugs? Forgot to return results
-#  5 5 5 4 = 4.75
+# Was the solution optimal? Yes for time but my original solutions all modified the array
+# Were there any bugs? N
+#  2 4 2 5 = 3.25
