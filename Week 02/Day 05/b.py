@@ -37,4 +37,4 @@ class Solution:
 # Did you finish within 30 min? Y 25
 # Was the solution optimal? Y
 # Were there any bugs? N
-#  5 5 5 5 = 5
+#  5 5 3 5 = 4.5
