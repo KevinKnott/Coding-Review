@@ -45,8 +45,8 @@ class Solution:
 
 
 # Score Card
-# Did I need hints? Y for index math on getting the split point
+# Did I need hints? N
 # Did you finish within 30 min? Y
-# Was the solution optimal? My initial solution is optimal however I needed to a bit of extra refactoring for using another metho
-# Were there any bugs? I initially was off by one on length because of hitting -1  and not changing length with a minus 1
-#  4 4 3 2 = 3.25
+# Was the solution optimal? My initial solution is optimal
+# Were there any bugs? None
+#  5 5 5 5 = 5
