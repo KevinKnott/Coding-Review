@@ -77,8 +77,8 @@ class Solution:
 
 
 # Score Card
-# Did I need hints? N (But the second solution did)
-# Did you finish within 30 min? Y
-# Was the solution optimal? It is optimal enough, technically you can improve from o(E+V ) to o(e and the ackermanfunction(n)) and sapce could be just o(V) instead
-# Were there any bugs? I did have one bug where I didn't add any nodes that were on there own like 0 in the example edges = [[2,3],[1,2],[1,3]]
-# 4 5 3 3 =  3.75
+# Did I need hints? N
+# Did you finish within 30 min? N
+# Was the solution optimal? It is optimal enough however I think I could make some slight improvements
+# Were there any bugs? I am having issues with double negative values
+# 5 1 3 3 = 3
