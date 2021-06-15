@@ -15,7 +15,7 @@ class Solution:
 
     # O(V + E) we create a graph of vertex to edge and visit them all only once
     # o(V+E) since we have a ajdacency list of V and a stack of potentially E
-    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+    def findOrder(self, numCourses, prerequisites):
         graph = {}
         color = {course: Solution.WHITE for course in range(numCourses)}
         topologicalOrder = []
