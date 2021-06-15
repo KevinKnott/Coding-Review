@@ -52,7 +52,7 @@ class Solution:
             for i in range(start, end):
                 if count[unique[i]] < pivotFreq:
                     unique[swapIndex], unique[i] = unique[i], unique[swapIndex]
-                swapIndex += 1
+                    swapIndex += 1
 
             # Swap pivot back
             unique[swapIndex], unique[pivot] = unique[pivot], unique[swapIndex]
