@@ -80,4 +80,4 @@ class Solution:
 # Did you finish within 30 min? n
 # Was the solution optimal? Yes my first solution is optimal but the second could be faster if it didn't fail
 # Were there any bugs? Y
-#  4 1 3 1 = 4.5
+#  4 1 3 1 = 2.25
