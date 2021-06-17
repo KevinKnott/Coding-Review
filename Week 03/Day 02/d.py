@@ -23,6 +23,6 @@ class Solution:
 # Score Card
 # Did I need hints? N
 # Did you finish within 30 min? 10
-# Was the solution optimal? This is optimal although I suppose you could recurse which would be worse
-# Were there any bugs? I forgot to check if node was null at the start
-#  5 5 5 4 = 4.75
+# Was the solution optimal? This is optimal
+# Were there any bugs? No
+#  5 5 5 5 = 5
