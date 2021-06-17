@@ -4,9 +4,21 @@
 # We repeatedly make duplicate removals on s until we no longer can.
 # Return the final string after all such duplicate removals have been made. It can be proven that the answer is unique.
 
+# My guess is that we should use a stack here as we can simply add a value and check if it equals last if it does
+# pop off the stack other wise append
 class Solution:
     def removeDuplicates(self, s: str) -> str:
-        return
+        stack = []
+
+        for i in s:
+            if len(stack) > 0 and stack[-1] == i:
+                stack.pop()
+            else:
+                stack.append(i)
+
+        return ''.join(stack)
+
+# Now is the above optimal I think so as this runs in O(n) time as we visit each letter once and o(n) space because we keep a stack that may be all different chars
 
 # Score Card
 # Did I need hints? N
