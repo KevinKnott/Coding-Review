@@ -1,12 +1,14 @@
-#  Reconstruct Itinerary: https://leetcode.com/problems/reconstruct-itinerary/
-# You are given a list of airline tickets where tickets[i] = [fromi, toi] represent the departure and the arrival airports of one flight. Reconstruct the itinerary in order and return it.
-# All of the tickets belong to a man who departs from "JFK", thus, the itinerary must begin with "JFK". If there are multiple valid itineraries, you should return the itinerary that has the smallest lexical order when read as a single string.
-#     For example, the itinerary ["JFK", "LGA"] has a smaller lexical order than ["JFK", "LGB"].
-# You may assume all tickets form at least one valid itinerary. You must use all the tickets once and only once.
+#  Add Strings: https://leetcode.com/problems/add-strings/
+
+# Given two non-negative integers, num1 and num2 represented as string, return the sum of num1 and num2 as a string.
+# You must solve the problem without using any built-in library for handling large integers (such as BigInteger). You must also not convert the inputs to integers directly.
+
 
 class Solution:
-    def findItinerary(self, tickets):
+    def addStrings(self, num1: str, num2: str) -> str:
+
         return
+
 
 # Score Card
 # Did I need hints? N
