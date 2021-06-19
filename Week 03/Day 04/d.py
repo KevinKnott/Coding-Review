@@ -35,10 +35,8 @@ class Solution:
 
 # Could we do better? Oh yeah the above goes through n! possible cases in the worst solution
 # Since we know that we have a subsequence of numbers we can cheat with a deque
-    from collections import deque
-
     def mostCompetitive(self, nums, k):
-        result = deque()
+        result = []
 
         addition = len(nums) - k
         for i in nums:
