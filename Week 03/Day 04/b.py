@@ -80,4 +80,4 @@ class Solution:
 # Did you finish within 30 min? 2 hours
 # Was the solution optimal? No idea
 # Were there any bugs? I spent so long trying to figure out why I was off by one but it turns out I wasn't ending the loop until start < len(s)
-#  3 1 1 1
+#  3 1 1 1 = 1.5
