@@ -54,6 +54,6 @@ class Solution:
 # Score Card
 # Did I need hints? N
 # Did you finish within 30 min? Y
-# Was the solution optimal? N I didn't think of the quick select solution and I would still have to implement it
-# Were there any bugs? Y my sorting took me a while to figure out my keys actually needed to be baseed off of count.get instead of count
-#  4 3 3 2 = 3
+# Was the solution optimal? Y
+# Were there any bugs? I had a slight problem with forgeting to increase my interval by 2 at first
+#  5 5 5 3 = 4.5
