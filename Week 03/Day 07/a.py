@@ -11,6 +11,8 @@
 
 # SnakeGame(int width, int height, int[][] food) Initializes the object with a screen of size height x width and the positions of the food.
 # int move(String direction) Returns the score of the game after applying one direction move by the snake. If the game is over, return -1.
+from collections import deque
+
 
 class SnakeGame:
 
@@ -22,6 +24,16 @@ class SnakeGame:
         @param food - A list of food positions
         E.g food = [[1,1], [1,0]] means the first food is positioned at [1,1], the second is at [1,0].
         """
+        # self.grid = [['.'] * width  for _ in range(height)]
+        self.height = height
+        self.width = width
+        self.food = deque()
+        self.score = 0
+        self.snake = deque()
+        self.snake.appendleft([0, 0])
+
+        for r, c in food:
+            self.food.appendleft((r, c))
 
     def move(self, direction: str) -> int:
         """
@@ -30,15 +42,44 @@ class SnakeGame:
         @return The game's score after the move. Return -1 if game over. 
         Game over when snake crosses the screen boundary or bites its body.
         """
+        dir = {'U': [-1, 0], 'D': [1, 0], 'L': [0, -1], 'R': [0, 1]}
+
+        # Check if the direction plus top of q is out of bounds
+        curRow, curCol = self.snake[0]
+        nextRow, nextCol = curRow + \
+            dir[direction][0], curCol + dir[direction][1]
+
+        if nextRow < 0 or nextRow >= self.height:
+            return -1
+
+        if nextCol < 0 or nextCol >= self.width:
+            return -1
+
+        if [nextRow, nextCol] in self.snake and [nextRow, nextCol] != self.snake[-1]:
+            return -1
+
+        self.snake.appendleft([nextRow, nextCol])
+
+        if len(self.food) and (nextRow, nextCol) == self.food[-1]:
+            self.food.pop()
+            self.score += 1
+
+        while len(self.snake) > self.score + 1:
+            self.snake.pop()
+
+        return self.score
 
 
 # Your SnakeGame object will be instantiated and called as such:
 # obj = SnakeGame(width, height, food)
 # param_1 = obj.move(direction)
 
+# My code is optimized to be run in o(1) time and o( N + W * H) where N is food and W * H is the snake set structure
+#
+
 # Score Card
-# Did I need hints? Yes unfortunately my pivot is failing in leetcode even though I double checked and see no difference in the code
-# Did you finish within 30 min? n
-# Was the solution optimal? Yes my first solution is optimal but the second could be faster if it didn't fail
-# Were there any bugs? Y
-#  4 1 3 1 = 2.25
+# Did I need hints? N
+# Did you finish within 30 min? Y
+# Was the solution optimal? Yes my first solution is optimal
+# Were there any bugs? Yup I forgot to make sure my check for hitting the boddy comes after we have removed the last element
+#  5 3 5 3 = 4
