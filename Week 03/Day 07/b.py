@@ -12,7 +12,43 @@ class ListNode:
 
 class Solution:
     def mergeKLists(self, lists) -> ListNode:
-        return
+        amount = len(lists)
+        round = 1
+
+        # This is some cool math
+        while round < amount:
+            # Basically we are looping by a smaller and smaller durration but increasing the interval between nodes
+            # This is an optimization where you are saving space by not poping off elements as you go down
+            for i in range(0, amount - round, round * 2):
+                lists[i] = self.mergeList(lists[i], lists[i+round])
+
+            round *= 2
+
+        # You could also do something along the lines of creating a temp list and merging 2 and adding it to temp list
+        # and then make that your list but it is slightly less efficient
+
+        return lists[0] if amount > 0 else None
+
+    def mergeList(self, A, B):
+        dummy = ListNode(0)
+        head = dummy
+
+        while A and B:
+            if A.val <= B.val:
+                head.next = A
+                A = A.next
+            else:
+                head.next = B
+                B = B.next
+
+            head = head.next
+
+        if A:
+            head.next = A
+        if B:
+            head.next = B
+
+        return dummy.next
 
 
 # Score Card
