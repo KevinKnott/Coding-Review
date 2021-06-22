@@ -16,7 +16,7 @@ from collections import deque
 
 class SnakeGame:
 
-    def __init__(self, width: int, height: int, food: List[List[int]]):
+    def __init__(self, width: int, height: int, food):
         """
         Initialize your data structure here.
         @param width - screen width
