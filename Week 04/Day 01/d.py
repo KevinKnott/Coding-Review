@@ -10,7 +10,7 @@
 # keep track of the sum and divide by len(q)
 # If we need to remove value we do so and remove it from sum
 
-from collections import deque()
+from collections import deque
 
 
 class MovingAverage:
