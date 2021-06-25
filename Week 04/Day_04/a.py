@@ -56,6 +56,37 @@ class Solution:
 
 # Apparently the optimized solution requires you to have a binary search which I haven't had the chance to read throught this problem enough times to understand
 
+# Also during review of this problem the following adjustments were needed we need to loop over the array backwards in order to succesfully solve this problem:
+        ourSum = [0]
+        for num in nums:
+            ourSum.append(ourSum[-1] + num)
+
+        # Since we want to know the minimized max we need to set our dp to infinity minus the starting point
+        dp = [[float('inf')] * (len(nums) + 1) for _ in range(m+1)]
+        dp[0][0] = 0
+
+        # Loop through the whole dp aray
+        for i in range(1,  m+1):
+            # For every possible size of j from 1 - m go across
+            for j in range(1, (len(nums)+1)):
+                # Once we have the current max we need to check the previous sections max to update our dp table
+                # It equals the minimum of what is in the dp array or the max of the cur sumation (sum[-1] - sum[i])
+                # It needs to check every subarray from 0 to the current row
+                for k in range(j-1, -1, -1):
+                    # For visibility
+                    print(i, j, k)
+                    currentSolution = dp[i][j]
+                    potentialSum = ourSum[j] - ourSum[k]
+                    # This is the previous potential splitting
+                    lastSeenSolution = dp[i-1][k]
+                    dp[i][j] = min(currentSolution, max(
+                        lastSeenSolution, potentialSum))
+
+                    if potentialSum > dp[i-1][k]:
+                        break
+
+        return dp[-1][-1]
+
 
 A = Solution()
 print(A.splitArray([7, 2, 5, 10, 8], 2))
