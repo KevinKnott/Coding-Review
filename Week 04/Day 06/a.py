@@ -13,13 +13,33 @@ class TreeNode:
 
 class Solution:
     def maxPathSum(self, root: TreeNode) -> int:
-        return
+        def dfs(node):
+            if node is None:
+                return 0
 
+            # Go down Left/right if it is negative we don't really need to consider it
+            left = max(dfs(node.left), 0)
+            right = max(dfs(node.right), 0)
+
+            # Check if you have a max path including this node as the root
+            self.maxSum = max(self.maxSum, left + node.val + right)
+
+            # Return only the max path not all three
+            return max(left, right) + node.val
+
+        self.maxSum = -float('inf')
+        dfs(root)
+        return self.maxSum
+
+# Luckily I just did this problem yesterday so it was fresh in my head. The main thing to note in this problem is that we have 2 checks
+# One is if the current subnode has the path through it or if the current node is in the path.
+# To check for this we make sure that we get the max of the node as the passthrough and then return the max path (left/right) or 0
+# Another tricky thing is that we need to not consider if we return just a negative number as our max sum step will grab the negative
+# And not have the correct value if one side has a negative value
 
 # Score Card
 # Did I need hints? N
-# Did you finish within 30 min? N (45 or so)
-# Was the solution optimal? I believe so we could make some slight optimization but this will run in o(n^2) because of the multiplicity we would go through once and then again to multiply
-#  and o(n) space
-# Were there any bugs? I listed bugs in the above code
-#  5 2 4 2 = 3.25
+# Did you finish within 30 min? 10 min
+# Was the solution optimal? Yes this is optimal and runs in o(n) and o(1) time and space
+# Were there any bugs? Nope no bugs for me
+# 5 5 5 5 = 5
