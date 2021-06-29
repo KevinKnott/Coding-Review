@@ -7,12 +7,53 @@
 
 class Solution:
     def decodeString(self, s: str) -> str:
-        return
+        values = []
+        strings = []
 
-# Score Card
+        index = 0
+        curVal = 0
+        curStr = ''
+        result = ''
+
+        while index < len(s):
+            if s[index].isdigit():
+                # Continue appending until we reach '['
+                while s[index] != '[':
+                    curVal = (10 * curVal) + int(s[index])
+                    index += 1
+
+                # Add our values
+                values.append(curVal)
+                strings.append(curStr)
+
+                # Reset temp
+                curVal = 0
+                curStr = ''
+
+            elif s[index] == ']':
+                curStr = strings.pop() + (curStr * values.pop())
+            else:
+                curStr += s[index]
+
+            index += 1
+
+        if curStr:
+            result += curStr
+
+        return result
+
+# My above solution works by using two stacks we can simplify this problem quite a bit in the grand scheme of things
+# this will run in o(maxK * N) so the max k which is the int values in the values stack time and o(N+D) where D is the
+# depth of nested values
+
+
+# Is it possible to do better? I suppose that the recursion of this may actually be a bit better but under the hood
+# I think the stack space will use just about the same amount of space.
+
+
+# # Score Card
 # Did I need hints? N
-# Did you finish within 30 min? N (45 or so)
-# Was the solution optimal? I believe so we could make some slight optimization but this will run in o(n^2) because of the multiplicity we would go through once and then again to multiply
-#  and o(n) space
-# Were there any bugs? I listed bugs in the above code
-#  5 2 4 2 = 3.25
+# Did you finish within 30 min? yes 27 min
+# Was the solution optimal? Oh yea see my blurb above
+# Were there any bugs? I had a slight confusion on how to return the string when we pop values off wher I switch cur string with a result string
+# 5 5 5 3 = 4.5
