@@ -14,7 +14,6 @@ from collections import Counter, deque, OrderedDict
 
 class Solution:
     def leastInterval(self, tasks, n: int) -> int:
-
         q = deque()
         tasks = Counter(tasks)
         impossible = set()
@@ -25,6 +24,7 @@ class Solution:
         tasks = OrderedDict(tasks.most_common())
 
         while len(tasks) > 0:
+            # tasks = OrderedDict(tasks.most_common())
             count += 1
             if n < 0:
                 lastFinished = q.pop()
