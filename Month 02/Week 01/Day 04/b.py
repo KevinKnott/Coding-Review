@@ -84,8 +84,8 @@ class Solution:
         return ''.join(result)
 
 # Score Card
-# Did I need hints? Y
-# Did you finish within 30 min? Y
-# Was the solution optimal? Y although I messed up the thought process of how to solve the problem
-# Were there any bugs?  I didn't really have any bugs
-#  2 3 3 5 = 3.25
+# Did I need hints? No
+# Did you finish within 30 min? 35
+# Was the solution optimal? Yes this is optimal it runs in o(n) and it doesn't use the builtin stack but an o(N * K) stack where K is the number of parenthesis
+# Were there any bugs?  I needed to add a check to make sure my index doesn't run out of bounds for the way I am getting numbers
+# 5 4 5 4 = 4.5
