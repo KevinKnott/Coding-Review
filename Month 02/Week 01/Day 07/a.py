@@ -12,14 +12,38 @@
 
 # If the town judge exists and can be identified, return the label of the town judge.  Otherwise, return -1.
 
+# So this problem seems like we need to create a count of how many inbound connections there are which means this is a graph problem
+# We will create a adj list and create all connections to each node and check for a node who has num people - 1 connections in
+# and no connections out
+
 class Solution:
     def findJudge(self, n, trust) -> int:
-        return
+        countIn = {}
+        countOut = {}
+
+        # Initiallize graph
+        for i in range(1, n + 1):
+            countIn[i] = 0
+            countOut[i] = 0
+
+        # Connect all nodes
+        for src, dest in trust:
+            countIn[dest] += 1
+            countOut[src] += 1
+
+        # Check if there are no outgoing connections and only incoming
+        for i in range(1, n + 1):
+            if countOut[i] == 0 and countIn[i] == (n - 1):
+                return i
+
+        # If we get here nothing was found
+        return -1
+
+# Boo to the yeah this works and runs in o(n) time and space
 
 # Score Card
 # Did I need hints? N
-# Did you finish within 30 min? N (45 or so)
-# Was the solution optimal? I believe so we could make some slight optimization but this will run in o(n^2) because of the multiplicity we would go through once and then again to multiply
-#  and o(n) space
-# Were there any bugs? I listed bugs in the above code
-#  5 2 4 2 = 3.25
+# Did you finish within 30 min? 12
+# Was the solution optimal? Yuhhh
+# Were there any bugs? None
+# 5 5 5 5 = 5
