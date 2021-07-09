@@ -73,4 +73,4 @@ class Solution:
 # Did you finish within 30 min? 30
 # Was the solution optimal? This should be optimal but the discussions talk about a more efficient solution
 # Were there any bugs? see negative bug
-# 3 3 4 4 = 14
+# 3 3 4 4 = 3.5
