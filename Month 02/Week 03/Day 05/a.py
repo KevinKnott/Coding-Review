@@ -13,14 +13,58 @@ class Node:
         self.right = right
 
 
+# For this problem we will have to do a simple dfs and then as we go down we should store the node that we are push the current node to the next
+# This is because as we go down the tree to the left we will get the prev node right then as we come back up that node should point
+# to the next node
+
+# Also the first time we reach the very end to the left we need to set it to the head and at the end point it to the last and vice versa to make it
+# a circle
+
 class Solution:
     def treeToDoublyList(self, root: 'Node') -> 'Node':
-        return
+        if root is None:
+            return
+
+        self.first = None
+        self.last = None
+
+        # This is a basic in order traversal
+
+        def dfs(node):
+            if node is not None:
+                # Traverse left side
+                dfs(node.left)
+
+                # If there is a node
+                # Check if we have a last node so we can point it to the next node
+                if self.last is not None:
+                    self.last.right = node
+                    node.left = self.last
+
+                # One you have updated the pointer check if we need to update first
+                else:
+                    self.first = node
+
+                self.last = node
+
+                dfs(node.right)
+
+        # Run through the automation
+        dfs(root)
+
+        # Point first to last and vice versa
+        self.first.left = self.last
+        self.last.right = self.first
+
+        return self.first
+
+# The above works pretty well as it is a simple dfs  with an in order traversal
+# At the the only tricky part is figuring out when we need to update when we have the first node
+# This will run in o(N) Time and space as we have to put every node on the stack and visit it
 
 # Score Card
 # Did I need hints? N
-# Did you finish within 30 min? N (45 or so)
-# Was the solution optimal? I believe so we could make some slight optimization but this will run in o(n^2) because of the multiplicity we would go through once and then again to multiply
-#  and o(n) space
-# Were there any bugs? I listed bugs in the above code
-#  5 2 4 2 = 3.25
+# Did you finish within 30 min? 15N (45 or so)
+# Was the solution optimal? See above
+# Were there any bugs? Nope
+# 5 5 5 5 = 5
