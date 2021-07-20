@@ -20,7 +20,7 @@ class TreeNode(object):
 
 class Codec:
 
-        def serialize(self, root):
+    def serialize(self, root):
         """Encodes a tree to a single string.
 
         :type root: TreeNode
@@ -80,7 +80,7 @@ class Codec:
                 right = TreeNode(int(data[index]))
                 node.right = right
                 q.appendleft(right)
-                
+
             # Move because we have parsed one more digit
             index += 1
 
