@@ -9,14 +9,36 @@
 
 # At the end, there is at most 1 stone left.  Return the weight of this stone (or 0 if there are no stones left.)
 
+# For the solution all we have to do is use a max heap and then we can get the next highest number in logn
+# then all we have to do is the above logic
+
+import heapq
+
+
 class Solution:
     def lastStoneWeight(self, stones) -> int:
-        return
+        for i in range(len(stones)):
+            stones[i] *= -1
+
+        heapq.heapify(stones)
+
+        while len(stones) > 1:
+            y = -1 * heapq.heappop(stones)
+            x = -1 * heapq.heappop(stones)
+
+            if x != y:
+                heapq.heappush(stones, -1 * (y - x))
+
+        return 0 if len(stones) == 0 else -1 * stones.pop()
+
+# The above works and runs in O(nlogn) and uses o(1) additional space as it modifies the existing list
+# Is there a better solution not really there is a interesting solution in which you could use bucketing
+# however it is definitely more complicated and uses more space as you need k buckets where
+# k is the largest val so if it was 90000 it would be quite horrible
 
 # Score Card
 # Did I need hints? N
-# Did you finish within 30 min? N (45 or so)
-# Was the solution optimal? I believe so we could make some slight optimization but this will run in o(n^2) because of the multiplicity we would go through once and then again to multiply
-#  and o(n) space
-# Were there any bugs? I listed bugs in the above code
-#  5 2 4 2 = 3.25
+# Did you finish within 30 min? 15
+# Was the solution optimal? Oh yea
+# Were there any bugs? None!
+# 5 5 5 5 = 5
