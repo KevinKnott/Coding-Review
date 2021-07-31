@@ -1,3 +1,11 @@
+# Pow(x, n): https://leetcode.com/problems/powx-n/
+
+# Implement pow(x, n), which calculates x raised to the power n (i.e., xn).
+
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        return
+
 
 # Score Card
 # Did I need hints? Y

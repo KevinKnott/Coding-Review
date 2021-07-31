@@ -1,4 +1,11 @@
+# Subarray Sum Equals K: https://leetcode.com/problems/subarray-sum-equals-k/
 
+# Given an array of integers nums and an integer k, return the total number of continuous subarrays whose sum equals to k.
+
+
+class Solution:
+    def subarraySum(self, nums, k: int) -> int:
+        return
 
 # Score Card
 # Did I need hints? Nope
