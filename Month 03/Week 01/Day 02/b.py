@@ -5,14 +5,49 @@
 # Given the array nums after the rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.
 # You must write an algorithm with O(log n) runtime complexity.
 
+# So this problem seems really complicated at first but since we know the values are sorted we have the easiest solution being a binary search
+# normally the rotation would mess this up but we can simply check whether or not the values are sorted in the range we need to look at
+# and determing if we need to search to the left half or the right half
+
+# Also the worst case we can do for this problem is still a linear scan so there is that
+
 
 class Solution:
     def search(self, nums, target):
-        return
+        lo, hi = 0, len(nums) - 1
+
+        while lo <= hi:
+            mid = lo + (hi - lo) // 2
+
+            if target == nums[mid]:
+                return mid
+            else:
+                # So if the number is below the value in the mid
+                # we can check if we have sorted numbers from low to mid because it should be on the left
+                # if it is sorted we go to the left
+                if nums[mid] >= nums[lo]:
+                    # Again we have to make sure it is sorted here as well
+                    if target >= nums[lo] and target < nums[mid]:
+                        hi = mid - 1
+                    else:
+                        lo = mid + 1
+
+                # Correctly sorted
+                else:
+                    # Again we have to make sure it is sorted here as well
+                    if target <= nums[hi] and target > nums[mid]:
+                        lo = mid + 1
+                    else:
+                        hi = mid - 1
+
+        return -1
+
+# This is optimal and runs in O(nlogn) and o(1)
 
 # Score Card
-# Did I need hints? Y
-# Did you finish within 30 min? Y
-# Was the solution optimal? Y although I messed up the thought process of how to solve the problem
-# Were there any bugs?  I didn't really have any bugs
-#  2 3 3 5 = 3.25
+# Did I need hints? Nope
+# Did you finish within 30 min? 20
+# Was the solution optimal? Yeee
+# Were there any bugs? I initially was searching for if the value was hi or lower than mid
+# because I forgot that I need to check for the sorted order first
+# 5 5 5 4 = 4.75
