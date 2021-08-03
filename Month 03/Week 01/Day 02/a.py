@@ -10,14 +10,29 @@ class TreeNode:
         self.right = right
 
 
+# This problem seems simple enough you go down the tree with a dfs and at every node
+# you point the children to the opposite side
+
 class Solution:
     def invertTree(self, root: TreeNode) -> TreeNode:
-        return
+
+        def dfs(node):
+            if node:
+                # Swap sides
+                node.left, node.right = node.right, node.left
+                # Traverse down
+                dfs(node.left)
+                dfs(node.right)
+        dfs(root)
+        return root
+
+
+# The above solution is very simple but it runs in O(N) time and O(1) space as we are simply editing in place
+
 
 # Score Card
 # Did I need hints? N
-# Did you finish within 30 min? N (45 or so)
-# Was the solution optimal? I believe so we could make some slight optimization but this will run in o(n^2) because of the multiplicity we would go through once and then again to multiply
-#  and o(n) space
-# Were there any bugs? I listed bugs in the above code
-#  5 2 4 2 = 3.25
+# Did you finish within 30 min?5
+# Was the solution optimal? Yeah
+# Were there any bugs? None
+# 5 5 5 5 = 5
