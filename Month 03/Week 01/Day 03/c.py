@@ -9,14 +9,38 @@
 # You are given an array trust where trust[i] = [ai, bi] representing that the person labeled ai trusts the person labeled bi.
 # Return the label of the town judge if the town judge exists and can be identified, or return -1 otherwise.
 
+# Based off of the given rules this seems like a graph problem where you have in degrees and out degrees
+# the solution is whichever node has no out degrees and n -1 in degrees is the result
+
+# This means all we have to do is setup a graph of all in degrees and one for all out degrees
+# and loop through the n possibilities
+
+from collections import defaultdict
+
 
 class Solution:
     def findJudge(self, n: int, trust) -> int:
-        return
+        inDegree = defaultdict(int)
+        outDegree = defaultdict(int)
+
+        for src, dest in trust:
+            outDegree[src] += 1
+            inDegree[dest] += 1
+
+        for i in range(1, n+1):
+            if outDegree[i] > 0:
+                continue
+
+            if inDegree[i] == n - 1:
+                return i
+
+        return -1
+
+# So the above works just as I expected it to and it runs in O(N) time and space
 
 # Score Card
 # Did I need hints? Nope
-# Did you finish within 30 min? 4 minutes
-# Was the solution optimal? Yup this runs in o(n+m) time in worst case and uses o(1) space
+# Did you finish within 30 min? 6 min
+# Was the solution optimal? Nope
 # Were there any bugs? None
 # 5 5 5 5 = 5
