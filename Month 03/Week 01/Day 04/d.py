@@ -11,9 +11,39 @@
 
 # Return true if and only if it is bipartite.
 
+# This problem is actually pretty easy you recursively dfs through the nodes and label them in your visited with a color red/black or 0/1
+# Continue this and if you ever try to color a node in an opposite color you return false else the problem is true
+
+
 class Solution:
     def isBipartite(self, graph) -> bool:
-        return
+        visited = {}
+        self.hasFaled = False
+
+        def dfs(node, color=0):
+            if node in visited:
+                if visited[node] ^ color:
+                    self.hasFaled = True
+                    return False
+
+                return True
+
+            visited[node] = color
+            for nei in graph[node]:
+                if not dfs(nei, color ^ 1):
+                    return False
+
+            return True
+
+        for i in range(len(graph)):
+            if i not in visited:
+                if not dfs(i):
+                    return False
+
+        return True
+
+# The above works and is actually kind of neat by coloring as we go we can limit this problem to a
+# time complexity of O(V+E) and a space complexity of only O(V)
 
 
 # Score Card
