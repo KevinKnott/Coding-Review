@@ -16,15 +16,29 @@ class TreeNode:
         self.right = right
 
 
+# This problem boils down to keeping track of the range of a valid value in a bst
+# so at every node we take a range -inf -> inf and update it depending on which node we move down
+# then if we have anything that is outside of this range we know that we have an invalid number
+
 class Solution:
     def isValidBST(self, root: TreeNode) -> bool:
-        return
+        def dfs(node, left=-float('inf'), right=float('inf')):
+            if not node:
+                return True
 
+            if node.val > left and node.val < right:
+                return dfs(node.left,  left, node.val) and dfs(node.right, node.val, right)
+
+            return False
+
+        return dfs(root)
+
+# The above works just peachy. This is really just a simple understanding of how a binary search tree works
+# The above runs in O(N) and uses O(1) space
 
 # Score Card
 # Did I need hints? N
-# Did you finish within 30 min? N (45 or so)
-# Was the solution optimal? I believe so we could make some slight optimization but this will run in o(n^2) because of the multiplicity we would go through once and then again to multiply
-#  and o(n) space
-# Were there any bugs? I listed bugs in the above code
-#  5 2 4 2 = 3.25
+# Did you finish within 30 min? 5
+# Was the solution optimal? Yee
+# Were there any bugs? None
+# 5 5 5 5 = 5
