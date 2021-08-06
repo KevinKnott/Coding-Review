@@ -1,4 +1,6 @@
-# Longest Palindromic Substring: Given a string s, return the longest palindromic substring in s.
+# Longest Palindromic Substring: https://leetcode.com/problems/longest-palindromic-substring/
+
+# Given a string s, return the longest palindromic substring in s.
 
 class Solution:
     def longestPalindrome(self, s: str) -> str:
