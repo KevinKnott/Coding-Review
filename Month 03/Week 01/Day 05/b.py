@@ -12,15 +12,40 @@ class TreeNode:
         self.left = left
         self.right = right
 
+# Okay this problem seems a bit crazy but we can combine another problem that I have seen where we get the longest path
+# with this problem basically at any node in the tree we need to  dfs down and calculate the value of keeping left
+# or right path sum + node or if the three combined are the max but the problem is we can return both
+# so we will take advantage of the class to keep a global max
+
+# Also for negative numbers we should consider not even taking it by saying take the max( dfs(left), 0)
+
 
 class Solution:
     def maxPathSum(self, root: TreeNode) -> int:
-        return
+        self.result = -float('inf')
 
+        def dfs(node):
+            if node is None:
+                return 0
+
+            # Remember to cut off negatives
+            left = max(dfs(node.left), 0)
+            right = max(dfs(node.right), 0)
+
+            # Get the max of left + root + right at every node
+            self.result = max(self.result, left + node.val + right)
+
+            return max(left, right) + node.val
+
+        dfs(root)
+        return self.result
+
+# Boo yeah I absolutely crushed this problem basically it is a dfs with speciallized pruning
+# This will run in O(N) and uses O(1) space
 
 # Score Card
 # Did I need hints? Y
-# Did you finish within 30 min? Y
-# Was the solution optimal? Y although I messed up the thought process of how to solve the problem
-# Were there any bugs?  I didn't really have any bugs
-#  2 3 3 5 = 3.25
+# Did you finish within 30 min? 10
+# Was the solution optimal? Yeah
+# Were there any bugs?  IForgot to intialize result to -inf
+# 5 5 5 5 = 5
