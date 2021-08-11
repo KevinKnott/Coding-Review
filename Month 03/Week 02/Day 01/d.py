@@ -51,8 +51,8 @@ class Solution:
 
 
 # Score Card
-# Did I need hints? N
-# Did you finish within 30 min? 10
+# Did I need hints? Yes
+# Did you finish within 30 min?  28
 # Was the solution optimal? This is optimal
 # Were there any bugs? No
-#  5 5 5 5 = 5
+# 3 5 5 5 = 4.5
