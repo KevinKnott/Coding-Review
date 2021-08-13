@@ -16,28 +16,59 @@
 
 # You must solve the problem without using the built-in queue data structure in your programming language.
 
+class Node:
+    def __init__(self, value, nextNode=None):
+        self.value = value
+        self.next = nextNode
+
+
 class MyCircularQueue:
 
     def __init__(self, k: int):
-        return
+        self.head = None
+        self.tail = None
+        self.maxSize = k
+        self.size = 0
 
     def enQueue(self, value: int) -> bool:
-        return
+        if self.isFull():
+            return False
+
+        temp = Node(value)
+
+        if self.size == 0:
+            self.head = temp
+            self.tail = self.head
+        else:
+            self.tail.next = temp
+            self.tail = self.tail.next
+
+        self.size += 1
+        return True
 
     def deQueue(self) -> bool:
-        return
+        if self.isEmpty():
+            return False
+
+        self.head = self.head.next
+        self.size -= 1
+        return True
 
     def Front(self) -> int:
-        return
+        if self.isEmpty():
+            return -1
+        return self.head.value if self.head else None
 
     def Rear(self) -> int:
-        return
+        if self.isEmpty():
+            return -1
+        return self.tail if self.tail else None
 
     def isEmpty(self) -> bool:
-        return
+        return self.size == 0
 
     def isFull(self) -> bool:
-        return
+        return self.size == self.maxSize
 
 
 # Your MyCircularQueue object will be instantiated and called as such:
@@ -49,9 +80,12 @@ class MyCircularQueue:
 # param_5 = obj.isEmpty()
 # param_6 = obj.isFull()
 
+# Circular queues are quite easy basically you take a singly linked list and make it point to itself at the end
+# which is actually pretty simple to code and quite efficient
+
 # Score Card
 # Did I need hints? N
-# Did you finish within 30 min? 10
+# Did you finish within 30 min? 7
 # Was the solution optimal? This is optimal
 # Were there any bugs? No
 #  5 5 5 5 = 5
