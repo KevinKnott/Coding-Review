@@ -9,14 +9,26 @@
 
 # It is guaranteed that every call to ping uses a strictly larger value of t than the previous call.
 
+# This is a basic q problem you pop off anything with the time  before t - 3000 at every ping and return the len of the q
+
+from collections import deque
+
 
 class RecentCounter:
 
     def __init__(self):
-        return
+        self.q = deque()
 
     def ping(self, t: int) -> int:
-        return
+        if t > 3000:
+            while self.q and self.q[-1] < t - 3000:
+                self.q.pop()
+
+        self.q.appendleft(t)
+
+        return len(self.q)
+
+# Easy q problem super straight forward O(1) time and space
 
 
 # Your RecentCounter object will be instantiated and called as such:
@@ -26,6 +38,6 @@ class RecentCounter:
 # Score Card
 # Did I need hints? Nope
 # Did you finish within 30 min? 4 minutes
-# Was the solution optimal? Yup this runs in o(n+m) time in worst case and uses o(1) space
+# Was the solution optimal? Yup
 # Were there any bugs? None
 # 5 5 5 5 = 5
