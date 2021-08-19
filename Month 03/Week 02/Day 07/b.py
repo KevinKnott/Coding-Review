@@ -11,15 +11,46 @@ class Node:
         self.left = left
         self.right = right
 
+# This problem seems hard intitially until you realize with a dfs you get the correct order going from left most node to right most node
+# All we have to do is update the self.left to point to the previous node somehow. Oh and we should also grab the most deep left node
+# as our first node. Once we do these two things we should have a pretty solid solution
+
 
 class Solution:
     def treeToDoublyList(self, root: 'Node') -> 'Node':
-        return
+        if not root:
+            return
 
+        self.start = None
+        self.previous = None
+
+        def dfs(node):
+            if node is not None:
+                dfs(node.left)
+
+                if self.previous is None:
+                    self.start = node
+                else:
+                    # Assign previous
+                    self.previous.right = node
+                    node.left = self.previous
+
+                self.previous = node
+                dfs(node.right)
+
+        dfs(root)
+
+        # Point ends to each other
+        self.start.left = self.previous
+        self.previous.right = self.start
+
+        return self.start
+
+# Aww snap basic tree and pointer manipulation right here this runs in O(N) and uses o(1) space
 
 # Score Card
-# Did I need hints? Y
-# Did you finish within 30 min? Y
-# Was the solution optimal? Y although I messed up the thought process of how to solve the problem
-# Were there any bugs?  I didn't really have any bugs
-#  2 3 3 5 = 3.25
+# Did I need hints? N
+# Did you finish within 30 min? 15
+# Was the solution optimal? Y
+# Were there any bugs? Nope
+# 5 5 5 5 = 5
