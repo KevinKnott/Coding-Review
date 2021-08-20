@@ -53,7 +53,7 @@ class Solution:
 
         return result
 
-# This is exactly what I stated and it runs in O(V * E) and uses O(N)
+# This is exactly what I stated and it runs in O(V * E) and uses O(N) space
 
 # Score Card
 # Did I need hints? N
