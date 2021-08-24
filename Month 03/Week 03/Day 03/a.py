@@ -10,15 +10,41 @@ class TreeNode:
         self.left = None
         self.right = None
 
+# In this problem we can do a dfs and keep an external track (or in parameters) of the whether we have found
+# p or q and when we have found both and are returned to the node we simply return that node otherwise
+# we return nothing
+
+# The other possible solution is knowing that as soon as we have found p or q anything below it is irrelevant
+# as we know at the very least that node is the parent if it is below. Then all we have to do is search the other
+# side and if we find the other side we know that the node that sent it down to each side is the parent.
+
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        return
+        def dfs(node):
+            if node:
+
+                if node == p or node == q:
+                    return node
+
+                left = dfs(node.left)
+                right = dfs(node.right)
+
+                if left and right:
+                    return node
+                if left:
+                    return left
+                if right:
+                    return right
+
+        return dfs(root)
+
+# In the above the worst case scenario is that we have to go down completely in the tree which is O(N) time
+# and we use O(1) space as we are simply returning the result as soon as we find it and are not storing it
 
 # Score Card
 # Did I need hints? N
-# Did you finish within 30 min? N (45 or so)
-# Was the solution optimal? I believe so we could make some slight optimization but this will run in o(n^2) because of the multiplicity we would go through once and then again to multiply
-#  and o(n) space
-# Were there any bugs? I listed bugs in the above code
-#  5 2 4 2 = 3.25
+# Did you finish within 30 min? 15
+# Was the solution optimal? Oh yeah
+# Were there any bugs? Nope
+# 5 5 5 5 = 5
