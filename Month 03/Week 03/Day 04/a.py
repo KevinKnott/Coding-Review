@@ -7,15 +7,40 @@
 
 from types import List
 
+# For this problem I think that we should use a stack to help parse through this list we have two options at any given point assuming
+# we can drop len(nums) - k elements basically if you find a value that is less and we can pop off numbers of the stack we should
+# otherwise we simply append the number. We will continue to do this until we have finished parsing, at that point it is still possible
+# that we have more than k numbers on the stack (1, 2, 3, 4) so the most competitive will be the first k elements so we will pop
+# off the back until we have arrived at our result
+
 
 class Solution:
     def mostCompetitive(self, nums: List[int], k: int) -> List[int]:
-        return
+        stack = []
+        possible = len(nums) - k
+
+        for num in nums:
+            while possible and stack and stack[-1] > num:
+                stack.pop()
+                possible -= 1
+
+            stack.append(num)
+
+        # Since we know that if you have strictly increasing numbers we will have a
+        # stack greater than k and we know the first k elements are all increasing
+        # pop off extra nums
+        while len(stack) > k:
+            stack.pop()
+
+        return stack
+
+# The above is correct and runs in O(N) time and space the question is can we actually do better?
+# I don't think we can as creating all the possibilites or possible subsequences will require
+# time or space
 
 # Score Card
 # Did I need hints? N
-# Did you finish within 30 min? N (45 or so)
-# Was the solution optimal? I believe so we could make some slight optimization but this will run in o(n^2) because of the multiplicity we would go through once and then again to multiply
-#  and o(n) space
-# Were there any bugs? I listed bugs in the above code
-#  5 2 4 2 = 3.25
+# Did you finish within 30 min? 6
+# Was the solution optimal? Y
+# Were there any bugs? N
+# 5 5 5 5 = 5
