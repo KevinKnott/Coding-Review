@@ -5,16 +5,42 @@
 # More formally, the probability of picking index i is w[i] / sum(w).
 
 from types import List
+import random
+
+# This problem is actually quite simple all you need to do is create a strucutre in which you keep the sums aka the weighted value and than you can use random to create
+# a number from 0 -> sum and return whatever index is below it. The optimal solution also involves using a binary search instead of a linear search so that
+# we have an o(logn) time complexity with an o(N) construcutor but O(1) pick index
 
 
 class Solution:
 
     def __init__(self, w: List[int]):
-        return
+        curSum = 0
+        self.values = []
+
+        for weight in w:
+            curSum += weight
+            self.values.append(curSum)
 
     def pickIndex(self) -> int:
-        return
+        if len(self.values) == 0:
+            return 0
 
+        pickedValue = random() * self.values[-1]
+        start, end = 0, len(self.values)
+
+        while start < end:
+            mid = start + (end - start) // 2
+
+            if pickedValue > self.values[mid]:
+                start = mid + 1
+            else:
+                end = mid
+
+        return start
+
+
+# Yup this works and runs in O(logn) for the pick and o(N) for the init and uses O(1) space for pick and o(N) for init
 
 # Your Solution object will be instantiated and called as such:
 # obj = Solution(w)
@@ -22,7 +48,7 @@ class Solution:
 
 # Score Card
 # Did I need hints? Y
-# Did you finish within 30 min? Y
-# Was the solution optimal? Y although I messed up the thought process of how to solve the problem
-# Were there any bugs?  I didn't really have any bugs
-#  2 3 3 5 = 3.25
+# Did you finish within 30 min? 10
+# Was the solution optimal? Y
+# Were there any bugs? N
+# 5 5 5 5 = 5
