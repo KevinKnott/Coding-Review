@@ -1,3 +1,14 @@
+# Meeting Rooms II: https://leetcode.com/problems/meeting-rooms-ii/
+
+# Given an array of meeting time intervals intervals where intervals[i] = [starti, endi], return the minimum number of conference rooms required.
+
+from types import List
+
+
+class Solution:
+    def minMeetingRooms(self, intervals: List[List[int]]) -> int:
+        return
+
 
 # Score Card
 # Did I need hints? Y
