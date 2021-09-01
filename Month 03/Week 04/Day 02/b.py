@@ -15,28 +15,69 @@
 # boolean isFull() Checks whether the circular queue is full or not.
 # You must solve the problem without using the built-in queue data structure in your programming language.
 
+# So for this problem we have to design a queue which is circular meaning that we can only use up to K spots
+
+class Node:
+    def __init__(self, value, nextNode=None):
+        self.value = value
+        self.next = nextNode
+
+
 class MyCircularQueue:
 
     def __init__(self, k: int):
-        return
+        self.cap = k
+        self.size = 0
+        self.head = None
+        self.tail = None
 
     def enQueue(self, value: int) -> bool:
-        return
+        if self.isFull():
+            return False
+
+        temp = Node(value)
+
+        if self.size == 0:
+            self.head = temp
+            self.tail = self.head
+        else:
+            self.tail.next = temp
+            self.tail = self.tail.next
+
+        self.size += 1
+
+        return True
 
     def deQueue(self) -> bool:
-        return
+        if self.isEmpty():
+            return False
+
+        self.head = self.head.next
+        self.size -= 1
+        return True
 
     def Front(self) -> int:
-        return
+        if self.isEmpty():
+            return -1
+
+        return self.head.value
 
     def Rear(self) -> int:
-        return
+        if self.isEmpty():
+            return -1
+
+        return self.tail.value
 
     def isEmpty(self) -> bool:
-        return
+        return self.size == 0
 
     def isFull(self) -> bool:
-        return
+        return self.size == self.cap
+
+
+# This works perfectly
+# This solution is way more efficient than using say a list to accomplish the same thing. This will run in O(1) time
+# and uses at max O(K) space
 
 
 # Your MyCircularQueue object will be instantiated and called as such:
@@ -49,8 +90,8 @@ class MyCircularQueue:
 # param_6 = obj.isFull()
 
 # Score Card
-# Did I need hints? Y
-# Did you finish within 30 min? Y
-# Was the solution optimal? Y although I messed up the thought process of how to solve the problem
-# Were there any bugs?  I didn't really have any bugs
-#  2 3 3 5 = 3.25
+# Did I need hints? N
+# Did you finish within 30 min? 8
+# Was the solution optimal? Y
+# Were there any bugs? N
+# 5 5 5 5 = 5
