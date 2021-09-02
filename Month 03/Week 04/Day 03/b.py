@@ -7,14 +7,49 @@
 
 from types import List
 
+# The first solution that comes to mind is doing a linear scan to find where the values swap which would be the easy solution.
+# however this would not be optimal as we know this list is still sorted and if we know that a list is sorted we know
+# that we can apply a binary search. The difficulty in this problem is making sure that you are searching down the right
+# half. To do this we will find a mid and compare that the values are sorted from lo -> mid and if it is we know that
+# we can proceed like normal and if it isn't we can do the opposite
+
 
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        return
+        # Not really needed
+        # if len(nums) == 0:
+        #     return -1
+
+        lo, hi = 0, len(nums) - 1
+
+        while lo <= hi:
+            mid = lo + (hi - lo) // 2
+
+            if nums[mid] == target:
+                return mid
+
+            # Properly sorted
+            if nums[lo] <= nums[mid]:
+                # Number between lo and mid search that segment
+                if nums[lo] <= target and target < nums[mid]:
+                    hi = mid - 1
+                else:
+                    lo = mid + 1
+            # Not properly sorted
+            else:
+                if target <= nums[hi] and target > nums[mid]:
+                    lo = mid + 1
+                else:
+                    hi = mid - 1
+
+        return -1
+
+# In this problem we can break down the flow especially if we look at an example or two
+# this runs in o(logn) and uses O(1) space
 
 # Score Card
-# Did I need hints? Y
-# Did you finish within 30 min? Y
-# Was the solution optimal? Y although I messed up the thought process of how to solve the problem
-# Were there any bugs?  I didn't really have any bugs
-#  2 3 3 5 = 3.25
+# Did I need hints? N
+# Did you finish within 30 min? 9
+# Was the solution optimal? Y
+# Were there any bugs? N
+# 5 5 5 5 = 5
