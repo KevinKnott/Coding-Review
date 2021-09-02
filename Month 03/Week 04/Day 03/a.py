@@ -8,6 +8,13 @@ from types import Optional
 
 # Definition for singly-linked list.
 
+# In this problem we are asked to develop a solution in which every k nodes we rotate the linked list
+# This problem is solved pretty easily in a recursive manor. We will count up to k nodes
+# and then we will reverse those k at the end we create the new head as the returned result
+# and then we will use the head (which will now be the last element) to attach to the next
+# call of reverseKgroup this is an O(N) time and O(N/k) space we could reduce space to one
+# with a complicated iterative approach of the same solution
+
 
 class ListNode:
     def __init__(self, val=0, next=None):
@@ -17,12 +24,90 @@ class ListNode:
 
 class Solution:
     def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
-        return
+        count = 0
+        cur = head
+
+        while cur and count < k:
+            cur = cur.next
+            count += 1
+
+        # Do we have k grouping
+        if count == k:
+            newHead = self.reverse(head, k)
+
+            # Head is now the tail as we reversed
+            # cur is now one past where the k grouping is
+            head.next = self.reverseKGroup(cur, k)
+
+            return newHead
+
+        return head
+
+    def reverse(self, head, k):
+        prev, cur = None, head
+
+        for _ in range(k):
+            temp = cur.next
+            cur.next = prev
+            prev = cur
+            cur = temp
+
+        return prev
+
+
+# So the above works and runs like I said (6 min)
+# Now for the more optimal solution:
+
+
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        cur = head
+        lastTail = None
+        result = None
+
+        while cur:
+            # Sam as before we need to update our head
+            # but our last solution will be in lastTail or result
+            cur = head
+            count = 0
+
+            while cur and count < k:
+                cur = cur.next
+                count += 1
+
+            # Do we have k grouping
+            if count == k:
+                reversed = self.reverse(head, k)
+
+                # First run so we update head pointer
+                if not result:
+                    result = reversed
+
+                # So this is the same as before except that we need to point to the lastTail
+                # Head is now the tail as we reversed
+                # cur is now one past where the k grouping is
+                if lastTail:
+                    lastTail.next = reversed
+
+                # The node that is the lastTail is the head node as we are updating head
+                # and last tail at every iteration
+                lastTail = head
+                # And just like before cur must be the node after the ndoes we just swapped
+                # so it has to be cur
+                head = cur
+
+        # Once we don't hit a k grouping we must still attach the last node if it exists
+        if lastTail:
+            lastTail.next = head
+
+        return result if result else head
+
+
+# Boom this is working it seems a bit complicated but it is more or less the same code as before
+# just rearranged to make sure we don't need to use a stack
 
 # Score Card
 # Did I need hints? N
-# Did you finish within 30 min? N (45 or so)
-# Was the solution optimal? I believe so we could make some slight optimization but this will run in o(n^2) because of the multiplicity we would go through once and then again to multiply
-#  and o(n) space
-# Were there any bugs? I listed bugs in the above code
-#  5 2 4 2 = 3.25
+# Did you finish within 30 min? 6 and 15
+# Was the solution optimal? Y
+# Were there any bugs? N
+# 5 5 5 5 = 5
