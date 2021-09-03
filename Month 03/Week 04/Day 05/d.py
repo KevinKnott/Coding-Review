@@ -15,14 +15,73 @@
 # For example, "(H2O2)" and "(H2O2)3" are formulas.
 # Return the count of all elements as a string in the following form: the first name (in sorted order), followed by its count (if that count is more than 1), followed by the second name (in sorted order), followed by its count (if that count is more than 1), and so on.
 
+# This problem comes down to using a stack to parse through the parenthesis and otherwise we can parse every element. Then at the we need to
+# sort and return the result
+
+from collections import Counter
+
+
 class Solution:
     def countOfAtoms(self, formula: str) -> str:
-        return
+        stack = [Counter()]
+        index = 0
 
+        while index < len(formula):
+
+            if formula[index] == '(':
+                stack.append(Counter())
+                index += 1
+            elif formula[index].isupper():
+
+                if index + 1 < len(formula) and formula[index + 1].islower():
+                    element = formula[index:index+2]
+                    index += 2
+                else:
+                    element = formula[index]
+                    index += 1
+
+                value = 0
+                while index < len(formula) and formula[index].isdigit():
+                    value = (value * 10) + int(formula[index])
+                    index += 1
+
+                if value == 0:
+                    value = 1
+
+                stack[-1][element] += value
+
+            else:
+                parent = stack.pop()
+                index += 1
+
+                multFactor = 0
+                while index < len(formula) and formula[index].isdigit():
+                    multFactor = (multFactor * 10) + int(formula[index])
+                    index += 1
+
+                if multFactor == 0:
+                    multFactor = 1
+
+                for element, v in parent.items():
+                    stack[-1][element] += v * multFactor
+
+        last = sorted(stack[-1])
+        result = []
+
+        for element in last:
+            result.append(
+                element + str(stack[-1][element]) if stack[-1][element] != 1 else element)
+
+        return ''.join(result)
+
+
+# Eyyyy lezzgo this is great
+# It runs in O(N^2) as for every paren we have to loop through an extra time to multiply values
+# and for space it simply uses o(N)
 
 # Score Card
 # Did I need hints? N
-# Did you finish within 30 min? 10
+# Did you finish within 30 min? 17
 # Was the solution optimal? This is optimal
 # Were there any bugs? No
 #  5 5 5 5 = 5
